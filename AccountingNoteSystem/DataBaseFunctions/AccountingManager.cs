@@ -11,6 +11,32 @@ namespace DataBaseFunctions
     /// <summary> 流水帳功能管理 </summary>
     public class AccountingManager
     {
+        /// <summary> 查詢首頁頁面資訊所需資料 </summary>
+        /// <returns> DataRow </returns>
+        public static DataRow GetDefaultPageData()
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"SELECT MAX([Accounting].[CreateDate]) AS lastest
+	                                ,MIN([Accounting].[CreateDate]) AS oldest
+	                                ,COUNT([Accounting].[ID]) AS totalAcc
+	                                ,COUNT([UserInfo].[ID]) AS totalMem
+                    FROM Accounting, UserInfo
+                 ";
+
+            List<SqlParameter> list = new List<SqlParameter>();
+
+            try
+            {
+                return DBHelper.ReadDataRow(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter(ex);
+                return null;
+            }
+        }
+
         /// <summary> 檢查流水帳清單 </summary>
         /// <param name="userID"> 使用者ID </param>
         /// <returns> 使用者DataTable </returns>
