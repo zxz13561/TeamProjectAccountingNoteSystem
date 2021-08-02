@@ -111,6 +111,13 @@
     <Compile Include="SystemAdmin\AccountingList.aspx.designer.cs">
       <DependentUpon>AccountingList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SystemAdmin\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAdmin\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
     <Compile Include="SystemAdmin\UserDetail.aspx.cs">
       <DependentUpon>UserDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -142,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="SystemAdmin\Admin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,10 +13,10 @@ namespace WebPages.SystemAdmin
         protected void Page_Load(object sender, EventArgs e)
         {
             //check already press button or not
-            if (!this.IsPostBack) 
+            if (!this.IsPostBack)
             {
                 // redirect to login page if user not login
-                if (!AuthManager.IsLogined()) 
+                if (!AuthManager.IsLogined())
                 {
                     Response.Redirect("/Login.aspx");
                     return;
