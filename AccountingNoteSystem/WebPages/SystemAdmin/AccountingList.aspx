@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SystemAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="AccountingList.aspx.cs" Inherits="WebPages.SystemAdmin.AccountingList" %>
+
+<%@ Register Src="~/SystemAdmin/UserControl/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -28,6 +31,7 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+                <uc1:ucPager runat="server" id="ucPager" PageSize="10" CurrentPage="1" Url="AccountingList.aspx"/>
                 <asp:PlaceHolder runat="server" ID="plcNoData" Visible="true">
                     <p style="font-family : Arial;color : red;">
                         No data in your Accounting Note.

@@ -38,9 +38,15 @@ namespace WebPages.SystemAdmin
             // check data is empty 
             if (dt.Rows.Count > 0)
             {
+                var dtPaged = this.GetPageDataTable(dt);
+
                 this.plcNoData.Visible = false;
-                this.gvAccountList.DataSource = dt;
+                this.gvAccountList.DataSource = dtPaged;
                 this.gvAccountList.DataBind();
+
+                // 顯示頁數功能
+                this.ucPager.TotalSize = dt.Rows.Count;
+                this.ucPager.Bind();
             }
             else
             {
@@ -84,6 +90,58 @@ namespace WebPages.SystemAdmin
                     lbl.ForeColor = Color.Red;
                 }
             }
+        }
+
+        /// <summary> 取得目前的頁數 </summary>
+        /// <returns> (int)頁 </returns>
+        private int GetCurrentPage()
+        {
+            // get what page
+            string pageText = Request.QueryString["Page"];
+            if (string.IsNullOrWhiteSpace(pageText))
+                return 1;
+
+            int intPage;
+            if (!int.TryParse(pageText, out intPage))
+                return 1;
+
+            if (intPage <= 0)
+                return 1;
+
+            return intPage;
+        }
+
+        /// <summary> 取得頁面數量的資料 </summary>
+        /// <param name="dt"></param>
+        /// <returns> DataTable 資料 </returns>
+        private DataTable GetPageDataTable(DataTable dt)
+        {
+            DataTable dtPaged = dt.Clone();
+            // dt.Copy() will error when no data inside data table
+
+            int startIndex = (this.GetCurrentPage() - 1) * 10;
+            int endIndex = this.GetCurrentPage() * 10;
+
+            if (endIndex > dt.Rows.Count)
+                endIndex = dt.Rows.Count;
+
+            for (var i = startIndex; i < endIndex; i++)
+            {
+                // create new data row
+                DataRow dr = dt.Rows[i];
+                var drNew = dtPaged.NewRow();
+
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    // get value
+                    drNew[dc.ColumnName] = dr[dc];
+                }
+
+                // Add row data
+                dtPaged.Rows.Add(drNew);
+            }
+
+            return dtPaged;
         }
     }
 }

@@ -56,7 +56,7 @@
         </asp:PlaceHolder>
         <asp:PlaceHolder ID="plcErr" runat="server" Visible="false">
             <br />
-            <asp:Label ID="lblLogin" runat="server">您已經登入會員</asp:Label>
+            <asp:Label ID="lblLogin" runat="server" Font-Names="微軟正黑體">您已經登入會員，要登出嗎?</asp:Label>
             <br />
             <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" />
             <a><!-- 版面間格用 -->     </a>
