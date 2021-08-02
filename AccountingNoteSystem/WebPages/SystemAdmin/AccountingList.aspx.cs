@@ -34,6 +34,14 @@ namespace WebPages.SystemAdmin
 
             // read accounting data
             var dt = AccountingManager.GetAccountingList(currentUser.ID.ToString());
+            
+            // count subtotal
+            int subtotal = 0;
+            foreach (DataRow subDr in dt.Rows)
+            {
+                subtotal += Convert.ToInt32(subDr["Amount"]);
+            }
+            this.ltlSubtotal.Text = $"小計 : {subtotal}";
 
             // check data is empty 
             if (dt.Rows.Count > 0)

@@ -10,9 +10,12 @@
             <td>
                 <asp:Button Text="新增一筆資料" ID="btnCreate" runat="server" OnClick="btnCreate_Click"/>
             </td>
+            <td style="text-align:right">
+                <asp:Literal ID="ltlSubtotal" runat="server"></asp:Literal>
+            </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <asp:GridView ID="gvAccountList" runat="server" AutoGenerateColumns="false" Width="353px" OnRowDataBound="gvAccountList_RowDataBound" >
                     <Columns>
                         <asp:BoundField HeaderText="建立日期" DataField="CreateDate" DataFormatString="{0:yyyy-MM-dd}" />
