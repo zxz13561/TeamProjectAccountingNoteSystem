@@ -19,9 +19,9 @@ namespace DataBaseFunctions
             string dbCommand =
                 @"SELECT MAX([Accounting].[CreateDate]) AS lastest
 	                                ,MIN([Accounting].[CreateDate]) AS oldest
-	                                ,COUNT([Accounting].[ID]) AS totalAcc
-	                                ,COUNT([UserInfo].[ID]) AS totalMem
-                    FROM Accounting, UserInfo
+	                                ,COUNT(*) AS totalAcc
+	                                ,(SELECT COUNT(*) FROM [dbo].[UserInfo]) AS totalMem
+                    FROM [dbo].[Accounting]
                  ";
 
             List<SqlParameter> list = new List<SqlParameter>();
