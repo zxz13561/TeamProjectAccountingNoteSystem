@@ -42,7 +42,7 @@
                 <tr>
                     <td style="text-align:right">密碼 :</td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtPwd"/>
+                        <asp:TextBox runat="server" ID="txtPwd"  TextMode="Password"/>
                     </td>
                 </tr>
                 <tr>
