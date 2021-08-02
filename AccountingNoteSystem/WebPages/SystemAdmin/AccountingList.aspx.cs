@@ -34,9 +34,9 @@ namespace WebPages.SystemAdmin
 
             // read accounting data
             var dt = AccountingManager.GetAccountingList(currentUser.ID.ToString());
-            
+
             // check data is empty 
-            if (dt.Rows.Count > 0) 
+            if (dt.Rows.Count > 0)
             {
                 this.plcNoData.Visible = false;
                 this.gvAccountList.DataSource = dt;

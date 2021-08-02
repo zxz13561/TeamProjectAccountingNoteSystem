@@ -14,7 +14,7 @@
         <table border="0">
             <tr>
                 <td colspan="2">
-                    <h1>歡迎使用流水帳紀錄系統 - 後台</h1>
+                    <h1>流水帳紀錄系統 - 後台</h1>
                 </td>
             </tr>
             <tr>
@@ -23,7 +23,7 @@
                 </td>
             </tr>
             <tr>
-                <td valign="top">
+                <td valign="top" width="170">
                     <h2>功能選單</h2>
                     <ul>
                         <li>
