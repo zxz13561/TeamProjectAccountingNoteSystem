@@ -1,7 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="WebPages.SystemAdmin.Admin" %>
-
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -33,7 +31,7 @@
                             <a href="/SystemAdmin/AccountingList.aspx">流水帳紀錄</a>
                         </li>
                         <li>
-                            <a href="/SystemAdmin/UserList.aspx">帳號管理</a>
+                            <a href="/SystemAdmin/UserList.aspx">會員管理</a>
                         </li>
                         <li>
                             <a href="/SystemAdmin/UserInfo.aspx">個人資料</a>

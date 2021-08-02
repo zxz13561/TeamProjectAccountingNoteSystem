@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DataBaseFunctions
 {
     /// <summary> DataBase basic operate functions </summary>
-    class DBHelper
+    public class DBHelper
     {
         /// <summary> 取得SQL連線字串 </summary>
         /// <returns> Web.Config中的連線設定 </returns>
