@@ -13,5 +13,10 @@ namespace WebPages.SystemAdmin
         {
 
         }
+
+        protected void btnChangePwd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

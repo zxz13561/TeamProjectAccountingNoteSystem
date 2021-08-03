@@ -56,6 +56,7 @@ namespace WebPages.SystemAdmin
                 {
                     // visible setting
                     this.btnDelete.Visible = true;
+                    this.btnPwd.Visible = true;
 
                     // disable input
                     this.txtID.Enabled = false;
@@ -159,6 +160,11 @@ namespace WebPages.SystemAdmin
             UserDBManager.DeleteUser(txtUID);
 
             Response.Redirect("UserList.aspx");
+        }
+
+        protected void btnPwd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserPassword.aspx");
         }
 
         /// <summary> 檢查輸入選項 </summary>

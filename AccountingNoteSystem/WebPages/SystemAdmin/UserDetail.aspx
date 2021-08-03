@@ -69,6 +69,8 @@
                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="儲存"/>
                 <b>&nbsp;&nbsp;</b>
                 <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="刪除" Visible="false"/>
+                <b>&nbsp;&nbsp;</b>
+                <asp:Button ID="btnPwd" runat="server" OnClick="btnPwd_Click" Text="變更密碼" Visible="false"/>
             </td>
             <td style="font-family:Arial;color:red">
                 <asp:Literal Text="" ID="ltlMsg" runat="server" />

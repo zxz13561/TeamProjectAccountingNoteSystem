@@ -6,6 +6,11 @@
     <title><%=this.MyTitle %></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <style>
+    table {
+        font-family:微軟正黑體
+    }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
