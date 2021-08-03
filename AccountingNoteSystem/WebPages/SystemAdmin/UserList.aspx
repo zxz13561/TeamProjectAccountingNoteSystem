@@ -25,7 +25,7 @@
                         <asp:BoundField HeaderText="建立日期" DataField="CreateDate" DataFormatString="{0:yyyy-MM-dd hh:mm:ss}"/>
                         <asp:TemplateField HeaderText="Act">
                             <ItemTemplate>
-                                <a href="/SystemAdmin/UserDetail.aspx?Acc=<%#Eval("Account")%>">Edit</a>
+                                <a href="/SystemAdmin/UserDetail.aspx?UID=<%#Eval("Account")%>">Edit</a>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

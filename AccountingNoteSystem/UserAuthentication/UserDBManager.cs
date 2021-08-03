@@ -17,8 +17,14 @@ namespace UserAuthentication
         {
             string connStr = DBHelper.GetConnectionString();
             string dbCommand =
-                @"SELECT [Account],[Name],[Email],[UserLevel],[CreateDate]
-                     FROM UserInfo
+                @"SELECT 
+                        [Account]
+                        ,[Name]
+                        ,[Email]
+                        ,[UserLevel]
+                        ,[CreateDate]
+                     FROM [UserInfo]
+                     ORDER BY [CreateDate] DESC
                  ";
 
             List<SqlParameter> list = new List<SqlParameter>();
@@ -26,6 +32,39 @@ namespace UserAuthentication
             try
             {
                 return DBHelper.ReadDataTable(connStr, dbCommand, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter(ex);
+                return null;
+            }
+        }
+
+        /// <summary> 取的會員資訊 </summary>
+        /// <param name="account"> 帳號 </param>
+        /// <returns> 帳號的會員資訊 </returns>
+        public static DataRow GetUserInfo(string account)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"SELECT 
+                        [ID],
+                        [Account],
+                        [PWD],
+                        [Name],
+                        [Email],
+                        [CreateDate],
+                        [UserLevel]
+                     FROM [dbo].[UserInfo]
+                     WHERE [Account] = @account
+                 ";
+
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@account", account));
+
+            try
+            {
+                return DBHelper.ReadDataRow(connStr, dbCommand, list);
             }
             catch (Exception ex)
             {

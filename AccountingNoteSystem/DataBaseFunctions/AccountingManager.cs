@@ -47,6 +47,7 @@ namespace DataBaseFunctions
                 @"SELECT [ID],[Caption],[Amount],[ActType],[CreateDate]
                      FROM Accounting
                      WHERE UserID = @userID
+                     ORDER BY [CreateDate] DESC
                  ";
 
             List<SqlParameter> list = new List<SqlParameter>();

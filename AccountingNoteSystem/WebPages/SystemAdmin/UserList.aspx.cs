@@ -68,7 +68,7 @@ namespace WebPages.SystemAdmin
 
         protected void btnAddAccount_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("UserDetail.aspx");
         }
     }
 }
