@@ -1,67 +1,37 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebPages.Login" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebPages.Login" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:PlaceHolder ID="plcLogin" runat="server" Visible="false">
+        <h3>會員登入</h3>
         <table border="0">
             <tr>
+                <td style="text-align:right;">帳號 :</td>
                 <td>
-                    <h1>歡迎使用流水帳紀錄系統</h1>
+                    <asp:TextBox runat="server" ID="txtAcc"/>
                 </td>
             </tr>
             <tr>
+                <td style="text-align:right">密碼 :</td>
                 <td>
-                    <hr />
+                    <asp:TextBox runat="server" ID="txtPwd"  TextMode="Password"/>
                 </td>
             </tr>
             <tr>
+                <td></td>
                 <td>
-                    <a href="Default.aspx">回系統首頁</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <hr />
+                    <asp:Button Text="登入" ID="btnLogin" runat="server" OnClick="btnLogin_Click"/>
+                    <asp:Literal ID="ltlMsg" runat="server" />
                 </td>
             </tr>
         </table>
-        <asp:PlaceHolder ID="plcLogin" runat="server" Visible="false">
-            <table border="0">
-                <tr>
-                    <td style="text-align:right;">帳號 :</td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtAcc"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align:right">密碼 :</td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtPwd"  TextMode="Password"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <asp:Button Text="登入" ID="btnLogin" runat="server" OnClick="btnLogin_Click"/>
-                        <asp:Literal ID="ltlMsg" runat="server" />
-                    </td>
-                </tr>
-            </table>
-        </asp:PlaceHolder>
-        <asp:PlaceHolder ID="plcErr" runat="server" Visible="false">
-            <br />
-            <asp:Label ID="lblLogin" runat="server" Font-Names="微軟正黑體">您已經登入會員，要登出嗎?</asp:Label>
-            <br />
-            <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" />
-            <a><!-- 版面間格用 -->     </a>
-            <asp:Button ID="btnGoInfo" runat="server" Text="回會員資訊" OnClick="btnGoInfo_Click" />
-        </asp:PlaceHolder>
-    </form>
-</body>
-</html>
+    </asp:PlaceHolder>
+    <asp:PlaceHolder ID="plcErr" runat="server" Visible="false">
+        <br />
+        <asp:Label ID="lblLogin" runat="server" Font-Names="微軟正黑體">您已經登入會員，要登出嗎?</asp:Label>
+        <br />
+        <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" />
+        <a><!-- 版面間格用 -->     </a>
+        <asp:Button ID="btnGoInfo" runat="server" Text="回系統後台" OnClick="btnGoInfo_Click" />
+    </asp:PlaceHolder>
+</asp:Content>

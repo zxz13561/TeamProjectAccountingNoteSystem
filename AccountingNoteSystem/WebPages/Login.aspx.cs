@@ -33,7 +33,7 @@ namespace WebPages
 
             if (!AuthManager.TryLogin(inp_Acc, inp_Pwd, out msg))
             {
-                this.ltlMsg.Text = msg; 
+                this.ltlMsg.Text = msg;
                 return;
             }
 
