@@ -40,21 +40,29 @@ namespace WebPages.SystemAdmin
                 // Check is account create mode or edit mode
                 if (this.Request.QueryString["UID"] == null)
                 {
+                    // visible setting
                     this.btnDelete.Visible = false;
+                    this.txtID.Visible = true;
+                    this.plcPwd.Visible = true;
 
                     // enable input
                     this.txtID.Enabled = true;
                     this.txtAccount.Enabled = true;
+                    this.txtPwd.Enabled = true;
                     this.ddlUserLevel.Enabled = true;
                     this.ltlCreateDate.Text = DateTime.Now.ToString();
                 }
                 else
                 {
+                    // visible setting
                     this.btnDelete.Visible = true;
+                    this.txtID.Visible = false;
+                    this.plcPwd.Visible = true;
 
                     // disable input
                     this.txtID.Enabled = false;
                     this.txtAccount.Enabled = false;
+                    this.txtPwd.Enabled = false;
                     this.ddlUserLevel.Enabled = false;
 
                     // check query string
@@ -92,12 +100,122 @@ namespace WebPages.SystemAdmin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            List<string> msgList = new List<string>();
 
+            // check input have error
+            if (!this.CheckInput(out msgList))
+            {
+                this.ltlMsg.Text = string.Join("<br/>", msgList);
+                return;
+            }
+
+            // check editor user is same data user
+            var currentUser = AuthManager.GetCurrecntUser();
+            if (currentUser == null)
+            {
+                this.Session["UserLoginInfo"] = null;
+                Response.Redirect("/Login.aspx");
+                return;
+            }
+
+            // collect input data
+            string _id = this.txtID.Text;
+            string _account = this.txtAccount.Text;
+            string _pwd = this.txtPwd.Text;
+            string _name = this.txtName.Text;
+            string _email = this.txtEmail.Text;
+            string _level = this.ddlUserLevel.SelectedValue;
+
+            // get data ID from query string
+            string txtAcc = this.Request.QueryString["UID"];
+
+            // check data ID
+            if (string.IsNullOrWhiteSpace(txtAcc))
+            {
+                // check User Level correct
+                if (int.TryParse(_level, out int userlevel))
+                {
+                    // create new user
+                    UserDBManager.CreateNewUser(_id, _account, _name, _pwd, _email, userlevel);
+                }
+            }
+            else
+            {
+                // update user information
+                UserDBManager.UpdateUserInfo(_account, _name, _email);
+            }
+
+            // wipe out password
+            _pwd = string.Empty;
+            this.txtPwd.Text = string.Empty;
+
+            Response.Redirect("/SystemAdmin/UserList.aspx");
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary> 檢查輸入選項 </summary>
+        /// <param name="errorMsgList"> 錯誤訊息 </param>
+        /// <returns> Boolean value </returns>
+        private bool CheckInput(out List<string> errorMsgList)
+        {
+            List<string> msgList = new List<string>();
+
+            //Check ID
+            if (string.IsNullOrWhiteSpace(this.txtID.Text))
+                msgList.Add("請輸入ID !");
+            else
+            if (!Guid.TryParse(this.txtID.Text, out Guid _testUID))
+                msgList.Add("ID不是Guid格式 !");
+
+
+            //Check Account
+            if (string.IsNullOrWhiteSpace(this.txtAccount.Text))
+                msgList.Add("請輸入帳號 !");
+
+            //Check Name
+            if (string.IsNullOrWhiteSpace(this.txtName.Text))
+                msgList.Add("請輸入名稱 !");
+
+            //Check Email
+            if (string.IsNullOrWhiteSpace(this.txtEmail.Text))
+                msgList.Add("請輸入E-mail !");
+            else
+                if (!IsValidEmail(this.txtEmail.Text))
+                    msgList.Add("請輸入正確的Email格式 !");
+
+            //Check User Level
+            if (this.ddlUserLevel.SelectedValue != "0" && this.ddlUserLevel.SelectedValue != "1")
+            {
+                msgList.Add("請正確使用選單 !");
+            }
+
+            errorMsgList = msgList;
+
+            // check have error
+            if (msgList.Count == 0)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary> 檢查Email格式正確 </summary>
+        /// <param name="email"> 字串 </param>
+        /// <returns> Boolean </returns>
+        private static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

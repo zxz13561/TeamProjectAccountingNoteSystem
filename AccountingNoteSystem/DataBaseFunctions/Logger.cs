@@ -18,7 +18,7 @@ namespace DataBaseFunctions
                         {ex.ToString()}
                 ";
             // Set folder path
-            string LogPath = "\\ErrLogs\\Log.log";
+            string LogPath = "E:\\Practice\\UbayWeek4TeamHomework\\AccountingNoteSystem\\DataBaseFunctions\\ErrLogs\\Log.log";
             string FolderPath = System.IO.Path.GetDirectoryName(LogPath);
 
             // check path exist
@@ -31,7 +31,7 @@ namespace DataBaseFunctions
 
             // write log file
             System.IO.File.AppendAllText(LogPath, msg);
-            throw ex;
+            //throw ex;
         }
     }
 }
