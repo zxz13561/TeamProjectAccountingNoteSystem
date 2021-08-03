@@ -65,10 +65,10 @@ namespace WebPages.SystemAdmin
                     this.ddlUserLevel.Enabled = false;
 
                     // check query string
-                    string accText = this.Request.QueryString["UID"];
-                    if (!string.IsNullOrWhiteSpace(accText))
+                    string uidText = this.Request.QueryString["UID"];
+                    if (!string.IsNullOrWhiteSpace(uidText))
                     {
-                        var drUser = UserDBManager.GetUserInfo(accText);
+                        var drUser = UserDBManager.GetUserInfo(uidText);
 
                         // check user in data base
                         if (drUser == null)
@@ -164,7 +164,11 @@ namespace WebPages.SystemAdmin
 
         protected void btnPwd_Click(object sender, EventArgs e)
         {
-            Response.Redirect("UserPassword.aspx");
+            // get uid and write into link
+            string _uid = this.Request.QueryString["UID"];
+            string _linkToPwd = $"UserPassword.aspx?UID={_uid}";
+
+            Response.Redirect(_linkToPwd);
         }
 
         /// <summary> 檢查輸入選項 </summary>

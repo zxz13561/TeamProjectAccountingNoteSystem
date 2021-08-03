@@ -39,7 +39,7 @@
                 <asp:Button Text="變更密碼" ID="btnChangePwd" OnClick="btnChangePwd_Click" runat="server" />
             </td>
             <td style="font-family:微軟正黑體;color:red">
-                <asp:Literal ID="ltlLengthMsg" runat="server" />
+                <asp:Literal ID="ltlErrMsg" runat="server" />
             </td>
         </tr>
     </table>
