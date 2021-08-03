@@ -20,16 +20,14 @@
                 <asp:TextBox ID="txtAccount" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
-        <asp:PlaceHolder ID="plcPwd" runat="server" Visible="false">
-            <tr>
-                <td style="text-align:right">
-                    密碼 : 
-                </td>
-                <td colspan="2">
-                    <asp:TextBox ID="txtPwd" runat="server" Enabled="false" TextMode="Password"></asp:TextBox>
-                </td>
-            </tr>
-        </asp:PlaceHolder>
+        <tr>
+            <td style="text-align:right">
+                <asp:Label runat="server" ID="lblPwd" Visible="false">密碼 : </asp:Label>
+            </td>
+            <td colspan="2">
+                <asp:TextBox ID="txtPwd" runat="server" Enabled="false" TextMode="Password" Visible="false"></asp:TextBox>
+            </td>
+        </tr>
         <tr>
             <td style="text-align:right">
                 姓名 : 
@@ -51,7 +49,7 @@
                 等級 : 
             </td>
             <td colspan="2">
-                <asp:DropDownList ID="ddlUserLevel" runat="server" Enabled="false">
+                <asp:DropDownList ID="ddlUserLevel" runat="server">
                     <asp:ListItem Value="0">管理者</asp:ListItem>
                     <asp:ListItem Value="1">一般會員</asp:ListItem>
                 </asp:DropDownList>
@@ -70,7 +68,7 @@
             <td>
                 <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="儲存"/>
                 <b>&nbsp;&nbsp;</b>
-                <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="刪除"/>
+                <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="刪除" Visible="false"/>
             </td>
             <td style="font-family:Arial;color:red">
                 <asp:Literal Text="" ID="ltlMsg" runat="server" />

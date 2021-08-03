@@ -41,9 +41,9 @@ namespace WebPages.SystemAdmin
                 if (this.Request.QueryString["UID"] == null)
                 {
                     // visible setting
-                    this.btnDelete.Visible = false;
                     this.txtID.Visible = true;
-                    this.plcPwd.Visible = true;
+                    this.lblPwd.Visible = true;
+                    this.txtPwd.Visible = true;
 
                     // enable input
                     this.txtID.Enabled = true;
@@ -56,8 +56,6 @@ namespace WebPages.SystemAdmin
                 {
                     // visible setting
                     this.btnDelete.Visible = true;
-                    this.txtID.Visible = false;
-                    this.plcPwd.Visible = true;
 
                     // disable input
                     this.txtID.Enabled = false;
@@ -127,10 +125,10 @@ namespace WebPages.SystemAdmin
             string _level = this.ddlUserLevel.SelectedValue;
 
             // get data ID from query string
-            string txtAcc = this.Request.QueryString["UID"];
+            string txtUID = this.Request.QueryString["UID"];
 
             // check data ID
-            if (string.IsNullOrWhiteSpace(txtAcc))
+            if (string.IsNullOrWhiteSpace(txtUID))
             {
                 // check User Level correct
                 if (int.TryParse(_level, out int userlevel))
@@ -142,7 +140,7 @@ namespace WebPages.SystemAdmin
             else
             {
                 // update user information
-                UserDBManager.UpdateUserInfo(_account, _name, _email);
+                UserDBManager.UpdateUserInfo(txtUID, _name, _email);
             }
 
             // wipe out password
@@ -154,7 +152,13 @@ namespace WebPages.SystemAdmin
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
+            // get data ID from query string
+            string txtUID = this.Request.QueryString["UID"];
 
+            // delete user
+            UserDBManager.DeleteUser(txtUID);
+
+            Response.Redirect("UserList.aspx");
         }
 
         /// <summary> 檢查輸入選項 </summary>

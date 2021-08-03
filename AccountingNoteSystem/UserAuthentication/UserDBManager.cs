@@ -160,31 +160,18 @@ namespace UserAuthentication
             }
         }
 
-
+        /// <summary> 刪除帳號 </summary>
+        /// <param name="uid"> UID </param>
         public static void DeleteUser(string uid)
         {
             string connStr = DBHelper.GetConnectionString();
             string dbCommand =
-                @"INSERT INTO [dbo].[UserInfo]
-                        ([ID]
-                        ,[Account]
-                        ,[Name]
-                        ,[PWD]
-                        ,[Email]
-                        ,[UserLevel]
-                        ,[CreateDate])
-                    VALUES
-                        (@id,
-                        @account,
-                        @name,
-                        @pwd,
-                        @email,
-                        @userLevel,
-                        @createDate)
+                @"DELETE FROM [dbo].[UserInfo]
+                    WHERE [ID] = @id
                 ";
 
             List<SqlParameter> parmList = new List<SqlParameter>();
-            parmList.Add(new SqlParameter("@createDate", DateTime.Now));
+            parmList.Add(new SqlParameter("@id", uid));
 
             try
             {
