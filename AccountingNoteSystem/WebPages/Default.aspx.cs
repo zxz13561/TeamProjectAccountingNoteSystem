@@ -13,6 +13,10 @@ namespace WebPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // write title
+            Main mainMaster = this.Master as Main;
+            mainMaster.pageTitle = "流水帳紀錄系統 - 首頁";
+
             // get data page need
             DataRow drDefault = AccountingManager.GetDefaultPageData();
 
