@@ -9,6 +9,9 @@ namespace WebPages.SystemAdmin
 {
     public partial class Admin : System.Web.UI.MasterPage
     {
+
+        public string MyTitle { get; set; } = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

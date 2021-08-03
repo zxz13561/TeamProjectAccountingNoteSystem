@@ -12,6 +12,10 @@ namespace WebPages.SystemAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // write page title
+            Admin mainMaster = this.Master as Admin;
+            mainMaster.MyTitle = "流水帳紀錄系統 - 後台 : 個人資料";
+
             //check already press button or not
             if (!this.IsPostBack)
             {
