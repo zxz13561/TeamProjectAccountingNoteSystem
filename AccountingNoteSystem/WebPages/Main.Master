@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="WebPages.Main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%=this.pageTitle %></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table border="0">
+            <tr>
+                <td colspan="2">
+                    <h1>歡迎使用流水帳紀錄系統</h1>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="170">
+                    <h2>功能選單</h2>
+                    <ul>
+                        <li>
+                            <a href="Login.aspx">會員登入/登出</a>
+                        </li>
+                        <li>
+                            <a href="Default.aspx">回首頁</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
