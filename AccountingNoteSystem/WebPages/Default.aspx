@@ -5,7 +5,7 @@
     <h3>系統使用狀態</h3>
     <table border="0">
         <tr>
-            <td style="text-align:right">  第一個記帳時間 : </td>
+            <td style="text-align:right">  第一筆記帳時間 : </td>
             <td>
                 <asp:Literal ID="ltlFirstDate" Text="text" runat="server" />
             </td>

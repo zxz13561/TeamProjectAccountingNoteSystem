@@ -182,5 +182,41 @@ namespace UserAuthentication
                 Logger.LogWriter(ex);
             }
         }
+
+        /// <summary> 更新會員密碼 </summary>
+        /// <param name="id"> UID </param>
+        /// <param name="pwd"> 新密碼 </param>
+        /// <returns> 修改的筆數(int) </returns>
+        public static bool UpdatePassword(string id, string pwd)
+        {
+            string connStr = DBHelper.GetConnectionString();
+            string dbCommand =
+                @"UPDATE [dbo].[UserInfo]
+                     SET
+                        [PWD]= @pwd
+                     WHERE
+                        [ID] = @id
+                ";
+
+            List<SqlParameter> parmList = new List<SqlParameter>();
+            parmList.Add(new SqlParameter("@PWD", pwd));
+            parmList.Add(new SqlParameter("@id", id));
+
+            try
+            {
+                int effectRows = DBHelper.ModifyDatas(connStr, dbCommand, parmList);
+
+                // check update successfully and return
+                if (effectRows == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWriter(ex);
+                return false;
+            }
+        }
     }
 }
