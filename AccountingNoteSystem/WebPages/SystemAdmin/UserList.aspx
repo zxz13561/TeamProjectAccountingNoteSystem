@@ -6,6 +6,11 @@
     <table>
         <tr>
             <td>
+                <asp:Button ID="btnAddAccount" runat="server" OnClick="btnAddAccount_Click" text="新增會員"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound" >
                     <Columns>
                         <asp:BoundField HeaderText="帳號" DataField="Account" />

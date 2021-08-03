@@ -41,13 +41,13 @@ namespace WebPages.SystemAdmin
             // get grid view row
             var row = e.Row;
 
-            // select act type row
+            // select row
             if (row.RowType == DataControlRowType.DataRow)
             {
                 // set row label
                 Label lbl = row.FindControl("lblUserLevel") as Label;
 
-                // get act type data
+                // get user level data
                 var dr = e.Row.DataItem as DataRowView;
                 int userLevel = dr.Row.Field<int>("UserLevel");
 
@@ -60,6 +60,11 @@ namespace WebPages.SystemAdmin
                     lbl.Text = "一般會員";
                 }
             }
+        }
+
+        protected void btnAddAccount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
