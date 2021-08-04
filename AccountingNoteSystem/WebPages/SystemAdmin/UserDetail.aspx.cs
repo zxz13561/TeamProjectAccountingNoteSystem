@@ -99,6 +99,93 @@ namespace WebPages.SystemAdmin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            this.SaveButtonFunction();
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            // get data ID from query string
+            string txtUID = this.Request.QueryString["UID"];
+
+            // delete user
+            UserDBManager.DeleteUser(txtUID);
+
+            Response.Redirect("UserList.aspx");
+        }
+
+        protected void btnPwd_Click(object sender, EventArgs e)
+        {
+            // get uid and write into link
+            string _uid = this.Request.QueryString["UID"];
+            string _linkToPwd = $"UserPassword.aspx?UID={_uid}";
+
+            Response.Redirect(_linkToPwd);
+        }
+
+        #region Method
+        /// <summary> 檢查輸入選項 </summary>
+        /// <param name="errorMsgList"> 錯誤訊息 </param>
+        /// <returns> Boolean value </returns>
+        private bool CheckInput(out List<string> errorMsgList)
+        {
+            List<string> msgList = new List<string>();
+
+            //Check ID
+            if (string.IsNullOrWhiteSpace(this.txtID.Text))
+                msgList.Add("請輸入ID !");
+            else
+                if (!Guid.TryParse(this.txtID.Text, out Guid _testUID))
+                    msgList.Add("ID不是Guid格式 !");
+
+            //Check Account
+            if (string.IsNullOrWhiteSpace(this.txtAccount.Text))
+                msgList.Add("請輸入帳號 !");
+
+            //Check Name
+            if (string.IsNullOrWhiteSpace(this.txtName.Text))
+                msgList.Add("請輸入名稱 !");
+
+            //Check Email
+            if (string.IsNullOrWhiteSpace(this.txtEmail.Text))
+                msgList.Add("請輸入E-mail !");
+            else
+                if (!IsValidEmail(this.txtEmail.Text))
+                    msgList.Add("請輸入正確的Email格式 !");
+
+            //Check User Level
+            if (this.ddlUserLevel.SelectedValue != "0" && this.ddlUserLevel.SelectedValue != "1")
+            {
+                msgList.Add("請正確使用選單 !");
+            }
+
+            errorMsgList = msgList;
+
+            // check have error
+            if (msgList.Count == 0)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary> 檢查Email格式正確 </summary>
+        /// <param name="email"> 字串 </param>
+        /// <returns> Boolean </returns>
+        private static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary> 儲存按鈕功能 </summary>
+        private void SaveButtonFunction()
+        {
             List<string> msgList = new List<string>();
 
             // check input have error
@@ -150,86 +237,6 @@ namespace WebPages.SystemAdmin
 
             Response.Redirect("/SystemAdmin/UserList.aspx");
         }
-
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-            // get data ID from query string
-            string txtUID = this.Request.QueryString["UID"];
-
-            // delete user
-            UserDBManager.DeleteUser(txtUID);
-
-            Response.Redirect("UserList.aspx");
-        }
-
-        protected void btnPwd_Click(object sender, EventArgs e)
-        {
-            // get uid and write into link
-            string _uid = this.Request.QueryString["UID"];
-            string _linkToPwd = $"UserPassword.aspx?UID={_uid}";
-
-            Response.Redirect(_linkToPwd);
-        }
-
-        /// <summary> 檢查輸入選項 </summary>
-        /// <param name="errorMsgList"> 錯誤訊息 </param>
-        /// <returns> Boolean value </returns>
-        private bool CheckInput(out List<string> errorMsgList)
-        {
-            List<string> msgList = new List<string>();
-
-            //Check ID
-            if (string.IsNullOrWhiteSpace(this.txtID.Text))
-                msgList.Add("請輸入ID !");
-            else
-            if (!Guid.TryParse(this.txtID.Text, out Guid _testUID))
-                msgList.Add("ID不是Guid格式 !");
-
-
-            //Check Account
-            if (string.IsNullOrWhiteSpace(this.txtAccount.Text))
-                msgList.Add("請輸入帳號 !");
-
-            //Check Name
-            if (string.IsNullOrWhiteSpace(this.txtName.Text))
-                msgList.Add("請輸入名稱 !");
-
-            //Check Email
-            if (string.IsNullOrWhiteSpace(this.txtEmail.Text))
-                msgList.Add("請輸入E-mail !");
-            else
-                if (!IsValidEmail(this.txtEmail.Text))
-                    msgList.Add("請輸入正確的Email格式 !");
-
-            //Check User Level
-            if (this.ddlUserLevel.SelectedValue != "0" && this.ddlUserLevel.SelectedValue != "1")
-            {
-                msgList.Add("請正確使用選單 !");
-            }
-
-            errorMsgList = msgList;
-
-            // check have error
-            if (msgList.Count == 0)
-                return true;
-            else
-                return false;
-        }
-
-        /// <summary> 檢查Email格式正確 </summary>
-        /// <param name="email"> 字串 </param>
-        /// <returns> Boolean </returns>
-        private static bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        #endregion
     }
 }

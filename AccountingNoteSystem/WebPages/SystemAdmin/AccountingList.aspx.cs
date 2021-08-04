@@ -147,6 +147,8 @@ namespace WebPages.SystemAdmin
             return dtPaged;
         }
 
+        /// <summary> 計算流水帳小計 </summary>
+        /// <param name="dt">User Data Table</param>
         private void CountSubTotal(DataTable dt)
         {
             // count subtotal
