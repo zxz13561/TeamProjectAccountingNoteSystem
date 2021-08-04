@@ -34,7 +34,14 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-                <uc1:ucPager runat="server" id="ucPager" PageSize="10" CurrentPage="1" Url="AccountingList.aspx"/>
+            </td>
+        <tr>
+            <td>
+                <uc1:ucPager runat="server" id="ucPager" PageSize="10" CurrentPage="1" Url="/SystemAdmin/AccountingList.aspx"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <asp:PlaceHolder runat="server" ID="plcNoData" Visible="true">
                     <p style="font-family : Arial;color : red;">
                         No data in your Accounting Note.

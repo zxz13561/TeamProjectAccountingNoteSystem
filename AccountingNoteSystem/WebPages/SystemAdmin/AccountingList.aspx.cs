@@ -46,7 +46,7 @@ namespace WebPages.SystemAdmin
                 subtotal += Convert.ToInt32(subDr["Amount"]);
             }
             this.ltlSubtotal.Text = $"小計 : {subtotal}";
-
+                
             // check data is empty 
             if (dt.Rows.Count > 0)
             {
@@ -104,8 +104,9 @@ namespace WebPages.SystemAdmin
             }
         }
 
-        /// <summary> 取得目前的頁數 </summary>
-        /// <returns> (int)頁 </returns>
+        #region Methods
+        /// <summary> 獲得目前頁數 </summary>
+        /// <returns> int 頁數 </returns>
         private int GetCurrentPage()
         {
             // get what page
@@ -155,5 +156,6 @@ namespace WebPages.SystemAdmin
 
             return dtPaged;
         }
+        #endregion
     }
 }

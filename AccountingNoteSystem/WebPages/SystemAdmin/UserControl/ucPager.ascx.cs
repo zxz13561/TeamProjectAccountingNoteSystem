@@ -16,46 +16,83 @@ namespace WebPages.SystemAdmin.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.Bind();
+
         }
 
-        /// <summary> 顯示頁數功能 </summary>
-        public void Bind()
+        private int PagerGetCurrentPage()
         {
-            int totalPages = this.GetTotalPages();
-            this.ltlPager.Text = $"總共 {TotalSize} 筆資料, 共 {totalPages} 頁, 目前在第 {GetCurrentPage()} 頁 </br>";
+            string pageText = this.Request.QueryString["page"];
 
-            for (var i = 1; i <= totalPages; i++)
-            {
-                this.ltlPager.Text += $"<a href='AccountingList.aspx?page={i}'>{i}</a>&nbsp";
-            }
-        }
-
-        private int GetCurrentPage()
-        {
-            // get what page
-            string pageText = Request.QueryString["Page"];
             if (string.IsNullOrWhiteSpace(pageText))
                 return 1;
 
-            int intPage;
-            if (!int.TryParse(pageText, out intPage))
+            int pageIndex = 0;
+            if (!int.TryParse(pageText, out pageIndex))
                 return 1;
 
-            if (intPage <= 0)
-                return 1;
-
-            return intPage;
+            return pageIndex;
         }
 
-        private int GetTotalPages()
+        public void Bind()
         {
-            int pagers = this.TotalSize / this.PageSize;
+            // 檢查一頁筆數
+            if (this.PageSize <= 0)
+                throw new DivideByZeroException();
 
-            if ((this.TotalSize % this.PageSize) > 0)
-                pagers += 1;
+            // 算總頁數
+            int totalPage = this.TotalSize / PageSize;
+            if (this.TotalSize % this.PageSize > 0)
+                totalPage += 1;
 
-            return pagers;
+            // 組裝Url demo.aspx?page=1
+            this.aLinkFirst.HRef = $"{this.Url}?page=1";
+            this.aLinkLast.HRef = $"{this.Url}?page={totalPage}";
+
+            this.CurrentPage = this.PagerGetCurrentPage();
+            this.ltlCurrentPage.Text = this.CurrentPage.ToString();
+
+            if (this.CurrentPage == 1)
+            {
+                this.aLink1.Visible = false;
+                this.aLink2.Visible = false;
+            }
+            else if (this.CurrentPage == 2)
+            {
+                this.aLink1.Visible = false;
+            }
+            else if (this.CurrentPage == (totalPage - 1))
+            {
+                this.aLink4.Visible = false;
+            }
+            else if (this.CurrentPage == totalPage)
+            {
+                this.aLink4.Visible = false;
+                this.aLink5.Visible = false;
+            }
+
+            // 計算頁數
+            int prevM1 = this.CurrentPage - 1;
+            int prevM2 = this.CurrentPage - 2;
+
+            this.aLink2.HRef = $"{this.Url}?page={prevM1}";
+            this.aLink2.InnerText = prevM1.ToString();
+            this.aLink1.HRef = $"{this.Url}?page={prevM2}";
+            this.aLink1.InnerText = prevM2.ToString();
+
+            int nextP1 = this.CurrentPage + 1;
+            int nextP2 = this.CurrentPage + 2;
+
+            this.aLink4.HRef = $"{this.Url}?page={nextP1}";
+            this.aLink4.InnerText = nextP1.ToString();
+            this.aLink5.HRef = $"{this.Url}?page={nextP2}";
+            this.aLink5.InnerText = nextP2.ToString();
+
+            this.aLink1.Visible = (prevM2 > 0);
+            this.aLink2.Visible = (prevM1 > 0);
+            this.aLink4.Visible = (nextP1 <= totalPage);
+            this.aLink5.Visible = (nextP2 <= totalPage);
+
+            this.ltPager.Text = $"</br> 共{this.TotalSize}筆資料, 共{totalPage}頁, 現在在第{this.PagerGetCurrentPage()}頁";
         }
     }
 }
