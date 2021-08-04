@@ -38,15 +38,9 @@ namespace WebPages.SystemAdmin
 
             // read accounting data
             var dt = AccountingManager.GetAccountingList(currentUser.ID.ToString());
-            
-            // count subtotal
-            int subtotal = 0;
-            foreach (DataRow subDr in dt.Rows)
-            {
-                subtotal += Convert.ToInt32(subDr["Amount"]);
-            }
-            this.ltlSubtotal.Text = $"小計 : {subtotal}";
-                
+
+            this.CountSubTotal(dt);
+
             // check data is empty 
             if (dt.Rows.Count > 0)
             {
@@ -90,16 +84,12 @@ namespace WebPages.SystemAdmin
                 if (actType == 0)
                 {
                     lbl.Text = "支出";
+                    lbl.ForeColor = Color.Red;
                 }
                 else
                 {
                     lbl.Text = "收入";
-                }
-
-                // change font color if amount is greater than 1500
-                if (dr.Row.Field<int>("Amount") > 1500)
-                {
-                    lbl.ForeColor = Color.Red;
+                    lbl.ForeColor = Color.Green;
                 }
             }
         }
@@ -155,6 +145,21 @@ namespace WebPages.SystemAdmin
             }
 
             return dtPaged;
+        }
+
+        private void CountSubTotal(DataTable dt)
+        {
+            // count subtotal
+            int _income = 0;
+            int _spand = 0;
+            foreach (DataRow subDr in dt.Rows)
+            {
+                if ((int)subDr["ActType"] == 0)
+                    _spand += Convert.ToInt32(subDr["Amount"]);
+                if ((int)subDr["ActType"] == 1)
+                    _income += Convert.ToInt32(subDr["Amount"]);
+            }
+            this.ltlSubtotal.Text = $"小計 : {_income - _spand}";
         }
         #endregion
     }

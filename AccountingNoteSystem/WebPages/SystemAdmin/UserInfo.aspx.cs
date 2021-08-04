@@ -45,7 +45,7 @@ namespace WebPages.SystemAdmin
         {
             // Logout account and redirect to homepage
             AuthManager.Logout();
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("/Login.aspx");
         }
     }
 }
