@@ -7,26 +7,25 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-    table {
-        font-family:微軟正黑體
-    }
+        table {
+            font-family:微軟正黑體
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <table border="0">
             <tr>
-                <td colspan="2">
+                <td colspan="2" style="background-color:#B8B5FF">
                     <h1>流水帳紀錄系統 - 後台</h1>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <hr />
+                <td colspan="2" style="background-color:#7868E6">
                 </td>
             </tr>
             <tr>
-                <td valign="top" width="170">
+                <td valign="top" width="170" style="background-color:#E4FBFF">
                     <h2>功能選單</h2>
                     <ul>
                         <li>
@@ -43,14 +42,14 @@
                         </li>
                     </ul>
                 </td>
-                <td>
+                <td style="background-color:#EDEEF7;padding-left:20px" width="565" height="365" valign="top">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <hr />
+                <td colspan="2" style="background-color:#7868E6">
+                    &ensp;
                 </td>
             </tr>
         </table>

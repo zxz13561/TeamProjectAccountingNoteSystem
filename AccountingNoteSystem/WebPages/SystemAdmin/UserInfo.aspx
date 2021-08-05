@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h3>個人資料</h3>    
-    <table style="border:2px solid;" border="1">
+    <table style="border:2px solid;" border="0">
         <tr>
             <th style="text-align:right">帳號 : </th>
             <td>

@@ -28,10 +28,11 @@
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="plcErr" runat="server" Visible="false">
         <br />
-        <asp:Label ID="lblLogin" runat="server" Font-Names="微軟正黑體">您已經登入會員，要登出嗎?</asp:Label>
+        <h3>提醒</h3>
+        <p>您已經登入會員，要登出嗎?</p>
         <br />
         <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" />
-        <a><!-- 版面間格用 -->     </a>
+        <a><!-- 版面間格用 -->&ensp;&ensp;&ensp;</a>
         <asp:Button ID="btnGoInfo" runat="server" Text="回系統後台" OnClick="btnGoInfo_Click" />
     </asp:PlaceHolder>
 </asp:Content>
