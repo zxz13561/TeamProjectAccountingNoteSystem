@@ -2,6 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <h2>歡迎使用流水帳紀錄系統!</h2>
+    <p>本系統可以記錄收入和支出的狀況，請登入後開始記錄~</p>
     <h3>系統使用狀態</h3>
     <table border="0">
         <tr>
